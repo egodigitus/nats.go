@@ -581,7 +581,6 @@ func (js *js) subscribe(subj, queue string, cb MsgHandler, ch chan *Msg, opts []
 
 func (js *js) lookupStreamBySubject(subj string) (string, error) {
 	var slr JSApiStreamNamesResponse
-	// FIXME(dlc) - prefix
 	req := &streamRequest{subj}
 	j, err := json.Marshal(req)
 	if err != nil {
@@ -698,7 +697,6 @@ func (sub *Subscription) Poll() error {
 }
 
 func (js *js) getConsumerInfo(stream, consumer string) (*ConsumerInfo, error) {
-	// FIXME(dlc) - prefix
 	ccInfoSubj := fmt.Sprintf(JSApiConsumerInfoT, stream, consumer)
 	resp, err := js.nc.Request(js.apiSubj(ccInfoSubj), nil, js.wait)
 	if err != nil {
