@@ -737,6 +737,10 @@ func (m *Msg) checkReply() (*js, bool, error) {
 
 // ackReply handles all acks. Will do the right thing for pull and sync mode.
 func (m *Msg) ackReply(ackType []byte, sync bool) error {
+	if m == nil {
+		return ErrInvalidMsg
+	}
+
 	js, isPullMode, err := m.checkReply()
 	if err != nil {
 		return err
