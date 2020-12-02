@@ -150,6 +150,14 @@ func ApiPrefix(pre string) JSOpt {
 		if !strings.HasSuffix(js.pre, ".") {
 			js.pre = js.pre + "."
 		}
+
+		for _, ch := range js.pre {
+			if ch == '*' || ch == '>' {
+				return fmt.Errorf("nats: ApiPrefix cannot contain wildcards, found: %s",
+					string(ch))
+			}
+		}
+
 		return nil
 	}
 }
